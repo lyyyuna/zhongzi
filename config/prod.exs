@@ -13,8 +13,16 @@ config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: Zhongzi.Finch
 # Disable Swoosh Local Memory Storage
 config :swoosh, local: false
 
-# Do not print debug messages in production
+# Production logging configuration with JSON format
 config :logger, level: :info
+
+config :logger, :console,
+  format: {Zhongzi.LoggerFormatter, :format},
+  metadata: [:request_id, :user_id, :operation, :duration_ms, :error_type, :remote_ip]
+
+# Use JSON format for production logs (easier for log aggregation)
+config :zhongzi,
+  log_format: :json
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.

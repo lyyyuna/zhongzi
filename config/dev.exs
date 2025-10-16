@@ -55,8 +55,14 @@ config :zhongzi, ZhongziWeb.Endpoint,
 # Enable dev routes for dashboard and mailbox
 config :zhongzi, dev_routes: true
 
-# Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+# Enhanced development logging with colors and metadata
+config :logger, :console,
+  format: {Zhongzi.LoggerFormatter, :format},
+  metadata: [:request_id, :user_id, :operation, :duration_ms, :remote_ip]
+
+# Use console format for development
+config :zhongzi,
+  log_format: :console
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
