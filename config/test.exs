@@ -16,5 +16,14 @@ config :swoosh, :api_client, false
 # Print only warnings and errors during test
 config :logger, level: :warning
 
+# Test logging configuration
+config :logger, :console,
+  format: {Zhongzi.LoggerFormatter, :format},
+  metadata: [:request_id, :test]
+
+# Use simple console format for tests
+config :zhongzi,
+  log_format: :console
+
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime

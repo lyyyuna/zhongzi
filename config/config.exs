@@ -52,10 +52,14 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
-# Configures Elixir's Logger
+# Configures Elixir's Logger with enhanced formatting
 config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  format: {Zhongzi.LoggerFormatter, :format},
+  metadata: [:request_id, :user_id, :operation, :duration_ms, :error_type]
+
+# Enhanced logging configuration
+config :zhongzi,
+  log_format: :console
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

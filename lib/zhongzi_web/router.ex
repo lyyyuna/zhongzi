@@ -8,10 +8,12 @@ defmodule ZhongziWeb.Router do
     plug :put_root_layout, html: {ZhongziWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug ZhongziWeb.Plugs.RequestLogger
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ZhongziWeb.Plugs.RequestLogger
   end
 
   scope "/", ZhongziWeb do
