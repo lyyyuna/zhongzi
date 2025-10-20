@@ -1,5 +1,7 @@
 # Zhongzi
 
+**[中文文档](README_CN.md) | English**
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
